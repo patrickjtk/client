@@ -1,0 +1,26 @@
+#Header {
+  background-color: #c1c1c1;
+  border: 1px solid #979797;
+  height: 70px;
+  padding: 0px 75px 0px 28px !important;
+  font-size: 14px;
+}
+
+#Header #name {
+  color: #444343;
+}
+
+#Header #logout {
+  color: #0091ff;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+#Header .mz-3 {
+  height: 50%;
+}
+
+#Header input.mzx-3.mx-2 {
+  height: 95%;
+}

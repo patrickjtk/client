@@ -231,7 +231,7 @@ class RegisterScreen extends Component {
           ) : (
             <div className="form p-0">
               <div className="form-group row purple-bg">
-                <h1 className="title">FOOTER</h1>
+                <h1 className="title text-center w-100 text-white">FOOTER</h1>
               </div>
             </div>
           )}

@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
     .email()
     .label("Email")
     .test("email_unique", "Try another email", async (value) => {
-      if (value.length > 8) {
+      if (value && value.length > 8) {
         return (await new RegisterService().uniqueEmail(value)).data.data;
       } else {
         return true;
@@ -21,14 +21,20 @@ const validationSchema = Yup.object().shape({
     }),
   first_name: Yup.string().required().label("First Name"),
   last_name: Yup.string().required().label("Last Name"),
-  year: Yup.number().min(1900),
+  year: Yup.number()
+    .min(1900)
+    .test(
+      "max_len",
+      "Year must be exactly 4 digit",
+      (val) => val && val.toString().length === 4
+    ),
   mobile_number: Yup.string()
     .required()
     .min(12)
     .matches(phoneRegEx, "Invalid Phone Number")
     .label("Mobile Number")
     .test("mobile_unique", "Try another number", async (value) => {
-      if (value.length > 12) {
+      if (value && value.length > 12) {
         return (await new RegisterService().uniqueMobilePhone(value)).data.data;
       } else {
         return true;
@@ -142,9 +148,12 @@ class RegisterScreen extends Component {
                       className="form-control"
                     />
                   </div>
-                  <label htmlFor="moanth" className="text-left">
+                  <label htmlFor="month" className="text-left">
                     Date of Birth
                   </label>
+                  <ErrorMessage name="year">
+                    {(msg) => <div className="speech-bubble">{msg}</div>}
+                  </ErrorMessage>
                   <div className="form-row">
                     <Field
                       as="select"
